@@ -68,21 +68,41 @@ class CustomImageDataset(Dataset):
         return image, label
 
 class MLPClassifier(nn.Module):
-    def __init__(self, input_size=64*64*3, dropout = 0.0, num_classes=10):
+    def __init__(self, input_size=64*64*3, dropout = 0.0, num_classes=10, init_strat="he"):
         super().__init__()
         self.model = nn.Sequential(
             nn.Flatten(),
             nn.Linear(input_size, 512),
-            nn.Dropout(dropout),
+            nn.BatchNorm1d(512),
             nn.ReLU(),
+            nn.Dropout(dropout),
             nn.Linear(512, 128),
-            nn.Dropout(dropout),
+            nn.BatchNorm1d(128),
             nn.ReLU(),
+            nn.Dropout(dropout),
             nn.Linear(128, num_classes)
         )
+        self.init_weights(init_strat)
+
+    
 
     def forward(self, x):
         return self.model(x)
+    
+    def init_weights(self, strat):
+        for m in self.modules():
+            if isinstance(m, nn.Linear):
+                if strat == "he":
+                    nn.init.kaiming_normal_(m.weight, nonlinearity='relu')
+                elif strat == "xavier":
+                    nn.init.xavier_uniform_(m.weight)
+                elif strat == "uniform":
+                    
+                    nn.init.uniform_(m.weight, a=-0.05, b=0.05)
+                
+                
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
 
 class CNNClassifier(nn.Module):
     def __init__(self, input_size, dropout = 0.0, num_classes=10):
