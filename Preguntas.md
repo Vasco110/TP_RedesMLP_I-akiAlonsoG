@@ -1,3 +1,8 @@
+# Resumen de lo que se probo
+
+Se probo primero utilizando el modelo simple diferencias entre utlizar o no el dropout batch norm, entre otros, de forma de visualizar en pocas epocas y codigos de poco tiempo de compilacion los efectos de los distintos metodos de regularizacion. Despues se hizo un simplificado de las variables para el modelo con busqueda de HP y se comparo, observando que los mejores resultados, aun todavia con la regularizacion presentaban signos importantes de overfitting. Sin embargo se observaron interesantes mejorias al utilizar batchnorm e inicializacion de variables, tanto por xavier como por he, y una red con inicializacion uniforme que logro muy buenos resultados. Se observo tambein mejores resultados con batch sizes mas chicos, sin dropout, o dropout bajo y con el optimizador de Adam.
+
+
 
 # Preguntas sobre el ejemplo de clasificación de imágenes con PyTorch y MLP
 
