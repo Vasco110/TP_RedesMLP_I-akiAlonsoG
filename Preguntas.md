@@ -2,7 +2,10 @@
 
 Se probo primero utilizando el modelo simple diferencias entre utlizar o no el dropout batch norm, entre otros, de forma de visualizar en pocas epocas y codigos de poco tiempo de compilacion los efectos de los distintos metodos de regularizacion. Despues se hizo un simplificado de las variables para el modelo con busqueda de HP y se comparo, observando que los mejores resultados, aun todavia con la regularizacion presentaban signos importantes de overfitting. Sin embargo se observaron interesantes mejorias al utilizar batchnorm e inicializacion de variables, tanto por xavier como por he, y una red con inicializacion uniforme que logro muy buenos resultados. Se observo tambein mejores resultados con batch sizes mas chicos, sin dropout, o dropout bajo y con el optimizador de Adam.
 
+# Resumen de los segunda pasada con CNN
 
+Se probaron de nuevo distintas combinaciones de hiperparametros, con CNN. Se observo que en promedio logra llegar a resultados de alrededor del 60% mas veces que las redes MLP, y en algunos casos sin overfitting tan exagerados como con als redes MLP, aunque sigue habiendo casos con 90% o similares en train y 65 hasta 68% en val, se logro utilizando xavier de inicializacion, batch size de 64, con dropout de 0.1 y Adam de optimizador, con una red CNN, resultados con train de 70% y aun asi validacion de entre 60 y 65%, por lo que se concluyo que estos casos si entrenaron correctamente y no son una casualidad en un contexto de overfitting.
+Se investigo acerca de Transfer Learning y se decidio probar con RESNET18, logrando entrenamientos mas rapidos, iniciando en una valoracion del 50% en tan solo 3 epocas y alcanzando 68% ent rain y 65% en val en tan solo 6 epocas. Esta red probomucho mejor que las anteriores alcanzando valores de validacion de hasta el 75% e incluso mayores, me confundi y quedo guardada en MLFlow dentro de MLP_Clasificador_Imagenes_con_earlystop como flawless-smelt-554.
 
 # Preguntas sobre el ejemplo de clasificación de imágenes con PyTorch y MLP
 
